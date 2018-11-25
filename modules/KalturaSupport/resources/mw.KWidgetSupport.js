@@ -856,6 +856,8 @@ mw.KWidgetSupport.prototype = {
 				dataType: 'jsonp',
 				success: function( playmanifest ){
 					var flavors = playmanifest.flavors;
+					embedPlayer.serverNodeIds=playmanifest.serverNodeIds;
+					embedPlayer.internalIpAddress=playmanifest.internalIpAddress;
 					if ( flavors && flavors.length === 1 ) {
 						srcToPlay = flavors[0].url;
 						deferred.resolve( srcToPlay );

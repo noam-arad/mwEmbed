@@ -300,10 +300,18 @@
             /**
              * manifest loaded handler.
              */
-            onManifestLoaded: function () {
+            onManifestLoaded: function (event,data) {
                 this.log("manifest loaded");
                 if (!this.embedPlayer.isLive()){
                     this.hls.startLoad(this.getPlayer().currentTime);
+                }
+                var serverNodeIds=data.networkDetails.getResponseHeader("x-servernodeids");
+                if (serverNodeIds) {
+                    this.embedPlayer.serverNodeIds = serverNodeIds;
+                }
+                var internalIpAddress=data.networkDetails.getResponseHeader("x-internalIpAddress");
+                if (internalIpAddress) {
+                    this.embedPlayer.internalIpAddress = internalIpAddress;
                 }
                 //HLS.JS by default sets showing to text track for default HLS manifest text track
                 //we want to handle it on ourselves so always set it to hidden after hls.js makes its decision

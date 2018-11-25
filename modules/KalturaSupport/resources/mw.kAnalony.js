@@ -590,6 +590,13 @@
 			this.eventIndex += 1;
 			this.embedPlayer.triggerHelper( 'analyticsEvent' , statsEvent);
 			this.log("Trigger analyticsEvent type = "+statsEvent.eventType);
+
+			if (this.embedPlayer.serverNodeIds) {
+                eventRequest["serverNodeIds"]=this.embedPlayer.serverNodeIds;
+			}
+            if (this.embedPlayer.internalIpAddress) {
+                eventRequest["internalIpAddress"]=this.embedPlayer.internalIpAddress;
+            }
 			this.kClient.doRequest( eventRequest, function(data){
 				try {
 					if (typeof data == "object") {
