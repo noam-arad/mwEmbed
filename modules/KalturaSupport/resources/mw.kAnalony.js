@@ -123,6 +123,16 @@
 			this.currentBitRate = -1;
             this.addBindings();
 	    },
+		// Older browsers do not have Object.keys support.
+		getKeys : function (obj) {
+			var r = [];
+			for (var k in obj) {
+				if (!obj.hasOwnProperty(k))
+					continue;
+				r.push(k);
+			}
+			return r;
+		},
 
 		addBindings : function() {
 			var _this = this;
@@ -132,7 +142,8 @@
 				if ( _this.kalturaContextData && _this.kalturaContextData.flavorAssets && _this.kalturaContextData.flavorAssets.length === 1 ){
 			        _this.currentBitRate = _this.kalturaContextData.flavorAssets[0].bitrate;
 		        }
-				_this.sendAnalytics(playerEvent.IMPRESSION);
+				var	plugins	= _this.getKeys(this.plugins);
+				_this.sendAnalytics(playerEvent.IMPRESSION, {plugins:plugins});
 			});
 			this.embedPlayer.bindHelper( 'onChangeMedia' , function () {
 				_this.timer.destroy();
