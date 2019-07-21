@@ -142,8 +142,8 @@
 				if ( _this.kalturaContextData && _this.kalturaContextData.flavorAssets && _this.kalturaContextData.flavorAssets.length === 1 ){
 			        _this.currentBitRate = _this.kalturaContextData.flavorAssets[0].bitrate;
 		        }
-				var	plugins	= _this.getKeys(this.plugins);
-				_this.sendAnalytics(playerEvent.IMPRESSION, {plugins:plugins});
+		        var plugins	= _this.getKeys(this.plugins);
+		        _this.sendAnalytics(playerEvent.IMPRESSION, {plugins:plugins});
 			});
 			this.embedPlayer.bindHelper( 'onChangeMedia' , function () {
 				_this.timer.destroy();
